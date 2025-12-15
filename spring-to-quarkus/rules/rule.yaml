@@ -1,0 +1,68 @@
+- ruleID: spring-to-quarkus-0001
+  description: (alex) Replace spring binding annotations for javax.ws.rs annotations compatible with Quarkus
+  category: mandatory
+  effort: 1
+  when:
+    java.referenced:
+      pattern: org.springframework.web.bind.annotation*
+      location: ANNOTATION
+  message: The `org.springframework.web.bind.annotation.*` annontation should be replaced with Quarkus compatible annotation `jakarta.ws.rs.*`.
+  labels:
+    - konveyor.io/target=quarkus
+    - konveyor.io/source=springboot
+
+
+- ruleID: spring-to-quarkus-0002
+  description: (alex) Replace spring annotations for javax.ws.rs imports compatible with Quarkus
+  category: mandatory
+  effort: 1
+  when:
+    java.referenced:
+      pattern: org.springframework.web.bind.annotation*
+      location: IMPORT
+  message: The `org.springframework.web.bind.annotation.*` imports should be replaced with Quarkus compatible imports `jakarta.ws.rs.*`.
+  labels:
+    - konveyor.io/target=quarkus
+    - konveyor.io/source=springboot
+
+- ruleID: spring-to-quarkus-0003
+  description: (alex) Replace spring main app annotations ones compatible with Quarkus
+  category: mandatory
+  effort: 1
+  when:
+    java.referenced:
+      pattern: org.springframework.boot.autoconfigure*
+      location: ANNOTATION
+  message: The `org.springframework.boot.autoconfigure.*` imports should be replaced with Quarkus compatible annotations `io.quarkus.runtime.annotations.*`.
+  labels:
+    - konveyor.io/target=quarkus
+    - konveyor.io/source=springboot
+
+- ruleID: spring-to-quarkus-0004
+  description: (alex) Replace spring main method for ones compatible with Quarkus
+  category: mandatory
+  effort: 1
+  when:
+    java.referenced:
+      pattern: org.springframework.boot.SpringApplication.run
+      location: METHOD_CALL
+  message: The `org.springframework.boot.SpringApplication.run` main endpoint should be replaced by a Quarkus compatible method.
+  labels:
+    - konveyor.io/target=quarkus
+    - konveyor.io/source=springboot
+
+- ruleID: spring-to-quarkus-0005
+  description: (alex) Adapt Pom.xml configuration from Spring to Quarkus
+  category: mandatory
+  effort: 1
+  when:
+    builtin.filecontent:
+      pattern: "springframework"
+      filePattern: "^pom.xml$"
+  message: Convert all the springboot dependencies from the POM.XML to its quarkus equivalent. Use dependencyManager `io.quarkus.platform.quarkus-bom`. Add the <build> plugins with execution goal of build on `quarkus-maven-plugin`. All Quarkus versions should be `3.29.4`
+  links:
+    - url: "https://docs.redhat.com/en/documentation/red_hat_build_of_quarkus/2.13/html/getting_started_with_quarkus/assembly_quarkus-getting-started_quarkus-getting-started"
+      title: Getting started with Quarkus on Maven
+  labels:
+    - konveyor.io/target=quarkus
+    - konveyor.io/source=springboot
