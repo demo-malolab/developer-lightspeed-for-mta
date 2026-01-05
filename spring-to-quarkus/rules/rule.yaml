@@ -59,7 +59,7 @@
     builtin.filecontent:
       pattern: "springframework"
       filePattern: "^pom.xml$"
-  message: Convert all the springboot dependencies from the POM.XML to its quarkus equivalent. Use dependencyManager `io.quarkus.platform.quarkus-bom`. Add the <build> plugins with execution goal of build on `quarkus-maven-plugin`. All Quarkus versions should be `3.29.4`
+  message: Remove Spring pom parent parameters and replace it by a <dependencyManagement> of 'io.quarkus.platform.quarkus-bom' instead. Change the springboot <dependencies> to its quarkus equivalent. Add the <build> plugins with execution goal of build on `quarkus-maven-plugin`. All Quarkus versions should be `3.29.4`
   links:
     - url: "https://docs.redhat.com/en/documentation/red_hat_build_of_quarkus/2.13/html/getting_started_with_quarkus/assembly_quarkus-getting-started_quarkus-getting-started"
       title: Getting started with Quarkus on Maven
