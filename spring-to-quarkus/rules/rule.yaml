@@ -73,8 +73,7 @@
   effort: 1
   when:
     builtin.file:
-      pattern:
-        - "resources\/.*\.properties"
+      pattern: "*.properties"
   message: Remove resource properties key-value meant for spring configuration and add a valid 2 stage containerfile at the root of the project to build and run the quarkus application. 
   labels:
     - konveyor.io/target=quarkus
